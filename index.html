@@ -1,61 +1,63 @@
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <title>Taller HTML, CSS y JS</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Georgia, 'Times New Roman', Times, serif;
             display: flex;
-            justify-content: center;
+            /*centrar*/
+            flex-direction: column;
+            /*vertical*/
+            align-items: center;
             margin-top: 80px;
-            background-color: #f4f4f4;
+            background-color: azure;
         }
-
 
         h1 {
             text-align: center;
         }
 
-
         input {
-            flex: 1;
-            padding: 10px;
+            padding: 20px;
         }
 
         button {
             padding: 10px 15px;
-            cursor: pointer;
         }
 
         ul {
-            list-style: none;
+            list-style: disc;
             padding: 0;
-            margin-top: 20px;
+            margin-top: 15px;
+            width: 200px;
         }
 
         li {
-            padding: 10px;
-            background: white;
-            margin-bottom: 8px;
+            padding: 7px;
+            background: azure;
+            margin-bottom: 10px;
             cursor: pointer;
         }
 
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
     </style>
 </head>
 
-
 <body>
-    <H1>
-        My tasks
-    </H1>
-    <h3>Add something to get started</h3>
-    <input type="text" id="input" placeholder="Write a new task">
-    <button id="add-btn">Add</button>
-    <p id="empty">No tasks</p>
-    <ul id="list"></ul>
 
+    <h1>Mi organizador de tareas</h1>
+    <h3>Agrega las tareas de la semana</h3>
+
+    <input type="text" id="input" placeholder="Agrega una tarea">
+    <button id="add-btn">Agregar</button>
+
+    <p id="empty">No hay tareas todavía</p>
+
+    <ul id="list"></ul>
 
     <script>
         const input = document.getElementById("input");
@@ -63,10 +65,51 @@
         const list = document.getElementById("list");
         const message = document.getElementById("empty");
 
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
+
+            const text = input.value.trim();
+
+            if (text === "") {
+                message.textContent = "No puedes agregar tareas en blanco";
+                return;
+            }
+            //crear
+            const li = document.createElement("li");
+            li.textContent = text;
+
+            li.addEventListener("click", function () {
+                if (li.classList.contains("done")) {
+                    li.classList.remove("done");
+                } else {
+                    li.classList.add("done");
+                }
+            });
+
+            //eliminar
+            const del_btn = document.createElement("span");
+            del_btn.textContent = "X";
+            del_btn.style.color = "red";
+            del_btn.style.marginLeft = "10px";
+            del_btn.style.cursor = "pointer";
+
+            del_btn.addEventListener("click", function () {
+                li.remove();
+                if (list.children.length === 0) {//children li de ul
+                    message.style.display = "block";//al limpiar, seguir mostrando que no hay invitados
+                }
+            });
+
+            //x para eliminar 
+            li.appendChild(del_btn);
+
+            list.appendChild(li);//agregar a lista y limpiar para nuevo
+            input.value = "";
+
+            message.style.display = "none";//ocultar que no hay cuando existan elementos en la lista
+            message.textContent = "Todavía no hay tareas registradas";
         });
     </script>
-</body>
 
+</body>
 
 </html>
