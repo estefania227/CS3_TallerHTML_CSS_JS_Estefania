@@ -5,25 +5,42 @@
 <head>
     <title>Taller HTML, CSS y JS</title>
     <style>
-        body{
-            background-color: azure;
-            margin: 100px;
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+            background-color: #f4f4f4;
         }
 
 
-        input{
-            padding: 15px;
+        h1 {
+            text-align: center;
         }
 
 
-        button{
-            padding: 15px;
+        input {
+            flex: 1;
+            padding: 10px;
         }
 
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
 
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
 
-
-
+        li {
+            padding: 10px;
+            background: white;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -34,17 +51,22 @@
         My tasks
     </H1>
     <h3>Add something to get started</h3>
-    <input type="text" value="Write a new task">
-    <button>Add</button>
-    <ul>
-        <li>Task 1</li>
-        <li>Task 2</li>
-    </ul>
-<script>
-    const boton=document.getElementById("input");
-</script>
+    <input type="text" id="input" placeholder="Write a new task">
+    <button id="add-btn">Add</button>
+    <p id="empty">No tasks</p>
+    <ul id="list"></ul>
+
+
+    <script>
+        const input = document.getElementById("input");
+        const button = document.getElementById("add-btn");
+        const list = document.getElementById("list");
+        const message = document.getElementById("empty");
+
+        button.addEventListener("click", function() {
+        });
+    </script>
 </body>
 
 
 </html>
-
